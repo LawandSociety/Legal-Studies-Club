@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Law & Society Club — Chapel Hill High School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FFFFFF;
+      --off-white: #F8F7F4;
+      --stone: #E8E4DC;
+      --ink: #1A1A18;
+      --ink-mid: #4A4A46;
+      --ink-light: #8A8A84;
+      --accent: #1C3F6E;
+      --accent-light: #EEF3FA;
+      --rule: #D8D4CC;
+      --font-display: 'DM Serif Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--ink-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 20px;
+      background: var(--accent);
+      color: var(--white) !important;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 48px 80px;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 760px;
+      margin-bottom: 32px;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--ink-mid);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 14px 28px;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-secondary {
+      padding: 14px 28px;
+      border: 1px solid var(--rule);
+      color: var(--ink);
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-bg-text {
+      position: absolute;
+      right: -20px;
+      bottom: 40px;
+      font-family: var(--font-display);
+      font-size: clamp(120px, 18vw, 220px);
+      font-style: italic;
+      color: var(--stone);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+      opacity: 0.6;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 72px;
+      padding-top: 48px;
+      border-top: 1px solid var(--rule);
+      flex-wrap: wrap;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    /* SECTION BASE */
+    section { padding: 100px 48px; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    /* ABOUT */
+    #about { background: var(--off-white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 60px;
+    }
+
+    .about-body {
+      font-size: 16px;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .about-body p + p { margin-top: 20px; }
+
+    .about-pillars { display: flex; flex-direction: column; }
+
+    .pillar {
+      padding: 28px 0;
+      border-top: 1px solid var(--rule);
+    }
+    .pillar:last-child { border-bottom: 1px solid var(--rule); }
+
+    .pillar-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .pillar-desc {
+      font-size: 14px;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+
+    /* LEADERSHIP */
+    #leadership { background: var(--white); }
+
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .leader-card {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 28px 24px;
+    }
+
+    .leader-role {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .leader-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .leader-name.tbd {
+      color: var(--ink-light);
+      font-style: italic;
+      font-size: 18px;
+    }
+
+    /* EVENTS */
+    #events { background: var(--off-white); }
+
+    .events-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .events-list { display: flex; flex-direction: column; }
+
+    .event-card {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 32px;
+      padding: 32px 0;
+      border-top: 1px solid var(--rule);
+    }
+    .event-card:last-child { border-bottom: 1px solid var(--rule); }
+
+    .event-date-block {
+      text-align: center;
+      background: var(--accent-light);
+      border-radius: 6px;
+      padding: 12px 8px;
+    }
+    .event-month {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .event-day {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--accent);
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .event-type {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 6px;
+    }
+    .event-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .event-meta { font-size: 13px; color: var(--ink-light); }
+
+    .event-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .event-link:hover { gap: 10px; }
+
+    .events-coming-soon {
+      text-align: center;
+      padding: 64px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .events-coming-soon p {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-style: italic;
+      color: var(--ink-light);
+      margin-bottom: 12px;
+    }
+    .events-coming-soon span {
+      font-size: 14px;
+      color: var(--ink-light);
+      font-weight: 300;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--ink); color: var(--white); }
+    #contact .section-label { color: rgba(255,255,255,0.35); }
+    #contact .section-title { color: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-top: 60px;
+      align-items: start;
+    }
+
+    .contact-intro {
+      font-size: 16px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
+    .contact-detail { display: flex; flex-direction: column; gap: 20px; }
+
+    .contact-item { display: flex; flex-direction: column; gap: 3px; }
+    .contact-item-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .contact-item-value { font-size: 15px; color: rgba(255,255,255,0.8); }
+    .contact-item-value a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    .contact-item-value a:hover { color: var(--white); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: rgba(255,255,255,0.35); }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select option { background: var(--ink); color: var(--white); }
+
+    .form-submit {
+      padding: 14px 28px;
+      background: var(--white);
+      color: var(--ink);
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: flex-start;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+    .form-submit:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p { font-size: 12px; color: rgba(255,255,255,0.25); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.6); }
+
+    /* RESOURCES */
+    #resources { background: var(--off-white); }
+
+    .resources-intro {
+      font-size: 16px;
+      color: var(--ink-mid);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+
+    .resources-category-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .resources-category { margin-bottom: 56px; }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .resource-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .resource-name {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .resource-role {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .resource-bio {
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.6;
+      font-weight: 300;
+      margin-top: 4px;
+    }
+
+    .resource-email {
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: 8px;
+      display: inline-block;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .resource-email:hover { border-color: var(--accent); }
+
+    .resource-link {
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .resource-link:hover { border-color: var(--accent); }
+
+    .resource-card.tbd {
+      border-style: dashed;
+      background: transparent;
+    }
+    .resource-card.tbd .resource-name { color: var(--ink-light); font-style: italic; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      #home, section { padding: 80px 20px; }
+      #home { padding-top: 100px; }
+      .hero-bg-text { display: none; }
+      .hero-stats { gap: 28px; }
+      .about-grid, .contact-grid, .form-row { grid-template-columns: 1fr; gap: 40px; }
+      .event-card { grid-template-columns: 60px 1fr; }
+      .event-link { display: none; }
+      footer { padding: 24px 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">Law & Society Club</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-eyebrow">Chapel Hill High School</div>
+  <h1 class="hero-headline">Where the law becomes <em>a living thing.</em></h1>
+  <p class="hero-sub">A community for Chapel Hill High School students who are curious about the law, justice, and how legal systems shape the world around us.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Join the Club</a>
+    <a href="#events" class="btn-secondary">Upcoming Events</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <!-- EDIT: Update member count as club grows -->
+      <div class="stat-num">New</div>
+      <div class="stat-label">Est. 2026</div>
+    </div>
+    <div class="stat-item">
+      <!-- EDIT: Update meeting details if they change -->
+      <div class="stat-num">Weekly</div>
+      <div class="stat-label">Meetings</div>
+    </div>
+    <div class="stat-item">
+      <!-- EDIT: Update as events are added -->
+      <div class="stat-num">CHHS</div>
+      <div class="stat-label">Chapel Hill, NC</div>
+    </div>
+  </div>
+  <div class="hero-bg-text" aria-hidden="true">Lex</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Us</div>
+  <h2 class="section-title">Built for students who think in precedents.</h2>
+  <div class="about-grid">
+    <div class="about-body">
+      <!-- EDIT: Update this text anytime to reflect what the club is doing -->
+      <p>The Law & Society Club is a student-run organization at Chapel Hill High School, sponsored by Mr. Jordan Kroll. We bring together students who want to think critically about the law as a lens for understanding society, justice, and governance.</p>
+      <p>Through case study discussions, guest attorney visits, and partnerships with local mock trial programs, we create a space where every student can engage with the law meaningfully. </p>
+      <p>No prerequisites. No experience required. Just a genuine curiosity about how the law shapes the world around us.</p>
+    </div>
+    <div class="about-pillars">
+      <!-- EDIT: Update pillar titles and descriptions to match what your club does -->
+      <div class="pillar">
+        <div class="pillar-title">Case Study Discussions</div>
+        <div class="pillar-desc">Unpack landmark rulings and current cases together in a guided, open discussion each meeting.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Guest Speaker Series</div>
+        <div class="pillar-desc">Hear directly from practicing attorneys, judges, and legal professionals in our community.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Mock Trial Partnership</div>
+        <div class="pillar-desc">Collaborate with local mock trial programs to put legal theory into practice.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Open to Everyone</div>
+        <div class="pillar-desc">No prerequisites, no experience needed — just curiosity about law and society.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="section-label">Leadership</div>
+  <h2 class="section-title">Meet the team.</h2>
+  <div class="leadership-grid">
+    <!-- EDIT: Update names as leadership positions are filled -->
+    <div class="leader-card">
+      <div class="leader-role">Faculty Advisor</div>
+      <div class="leader-name">Mr. Jordan Kroll</div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-role">President</div>
+      <div class="leader-name">Asa Foster</div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-role">Vice President</div>
+      <div class="leader-name">Phineas Thurber</div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-role">Secretary</div>
+      <div class="leader-name tbd">Coming Soon</div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-role">Treasurer</div>
+      <div class="leader-name tbd">Coming Soon</div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="events-header">
+    <div>
+      <div class="section-label">Upcoming Events</div>
+      <h2 class="section-title">Mark your calendar.</h2>
+    </div>
+    <a href="#contact" class="btn-secondary">Get Event Updates</a>
+  </div>
+
+  <!-- EDIT: Replace this block with real events when you have them.
+       Copy one .event-card div for each new event.
+       To add an event: copy the block below, change the month, day, type, title, and meta. -->
+
+  <div class="events-coming-soon">
+    <p>Events coming soon.</p>
+    <span>Follow us on Instagram @chhs.lawandsociety for the latest updates.</span>
+  </div>
+
+  <!-- EXAMPLE EVENT — uncomment and fill in when ready:
+  <div class="events-list">
+    <div class="event-card">
+      <div class="event-date-block">
+        <div class="event-month">Aug</div>
+        <div class="event-day">15</div>
+      </div>
+      <div class="event-info">
+        <div class="event-type">Guest Speaker</div>
+        <div class="event-title">Event Title Here</div>
+        <div class="event-meta">11:45 AM · Room C213, Chapel Hill High School</div>
+      </div>
+      <a href="#contact" class="event-link">RSVP →</a>
+    </div>
+  </div>
+  -->
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="section-label">Resources & Contacts</div>
+  <h2 class="section-title">People & places to know.</h2>
+  <p class="resources-intro">A growing directory of legal professionals, guest speakers, and academic resources connected to the Law & Society Club. Check back as we build relationships with attorneys, organizations, and institutions in our community.</p>
+
+  <!-- LEGAL PROFESSIONALS -->
+  <div class="resources-category">
+    <div class="resources-category-label">Legal Professionals</div>
+    <div class="resources-grid">
+
+      <!-- EDIT: Replace this card when your first guest speaker or attorney contact is confirmed.
+           Copy the block below for each new professional you add. -->
+      <div class="resource-card">
+        <div class="resource-role">Corporate & Transactions Attorney · Smith Anderson</div>
+        <div class="resource-name">Rob Hash</div>
+        <div class="resource-bio">Rob advises public and private companies on mergers and acquisitions, private equity, corporate governance, and technology transactions including data privacy and software licensing. A UNC Law graduate (J.D., cum laude), he has been recognized by Best Lawyers: Ones to Watch® in America for M&A Law and Corporate Law (2022–2026). Before law school, Rob ran his own consulting business and worked with clients in the U.S. and Italy. He is conversant in Italian.</div>
+        <a href="https://www.smithlaw.com" target="_blank" class="resource-link">smithlaw.com →</a>
+      </div>
+
+      <!-- EXAMPLE — copy, uncomment, and fill in for each new professional:
+      <div class="resource-card">
+        <div class="resource-role">Criminal Defense Attorney</div>
+        <div class="resource-name">Jane Smith</div>
+        <div class="resource-bio">Jane is a Chapel Hill-based attorney with 15 years of experience in criminal defense. She spoke at our club in Fall 2026.</div>
+        <a href="mailto:jane@example.com" class="resource-email">jane@example.com</a>
+      </div>
+      -->
+
+    </div>
+  </div>
+
+  <!-- ACADEMIC RESOURCES -->
+  <div class="resources-category">
+    <div class="resources-category-label">Academic Resources</div>
+    <div class="resources-grid">
+
+      <div class="resource-card">
+        <div class="resource-role">Legal Research</div>
+        <div class="resource-name">Cornell Law School — Legal Information Institute</div>
+        <div class="resource-bio">A free, comprehensive resource for U.S. law, court opinions, statutes, and legal definitions. An excellent starting point for any case research.</div>
+        <a href="https://www.law.cornell.edu" target="_blank" class="resource-link">law.cornell.edu →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-role">Supreme Court Opinions</div>
+        <div class="resource-name">Oyez</div>
+        <div class="resource-bio">A multimedia archive of U.S. Supreme Court cases including oral arguments, decisions, and plain-language summaries of landmark rulings.</div>
+        <a href="https://www.oyez.org" target="_blank" class="resource-link">oyez.org →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-role">Court Documents & Filings</div>
+        <div class="resource-name">PACER — Public Access to Court Records</div>
+        <div class="resource-bio">The official U.S. federal court system database for accessing case filings, dockets, and documents from federal district and appellate courts.</div>
+        <a href="https://www.pacer.gov" target="_blank" class="resource-link">pacer.gov →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-role">Legal News & Analysis</div>
+        <div class="resource-name">SCOTUSblog</div>
+        <div class="resource-bio">The most comprehensive independent source for coverage of the U.S. Supreme Court, including case summaries, live blogs, and plain-English explanations.</div>
+        <a href="https://www.scotusblog.com" target="_blank" class="resource-link">scotusblog.com →</a>
+      </div>
+
+      <!-- EDIT: Add more academic resources below as you discover them.
+           Copy any resource-card block above and update the role, name, bio, and link. -->
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <h2 class="section-title">Ready to join?</h2>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro">Whether you want to become a member, suggest a case to discuss, or find out more about what we do — we'd love to hear from you. Fill out the form or reach us directly.</p>
+      <div class="contact-detail">
+        <!-- EDIT: Update any contact details below if they change -->
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-value"><a href="mailto:lawandsociety.chccs@gmail.com">lawandsociety.chccs@gmail.com</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Meetings</span>
+          <span class="contact-item-value">Every Tuesday at lunch (11:45 AM – 12:25 PM)</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Location</span>
+          <span class="contact-item-value">Room C213, Chapel Hill High School</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Instagram</span>
+          <span class="contact-item-value"><a href="https://instagram.com/chhs.lawandsociety" target="_blank">@chhs.lawandsociety</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Faculty Advisor</span>
+          <span class="contact-item-value">Mr. Jordan Kroll</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="your@email.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="grade">Grade</label>
+        <select id="grade">
+          <option value="">Select your grade</option>
+          <option>9th Grade</option>
+          <option>10th Grade</option>
+          <option>11th Grade</option>
+          <option>12th Grade</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="interest">I'm interested in</label>
+        <select id="interest">
+          <option value="">Select an option</option>
+          <option>Joining as a member</option>
+          <option>Attending a specific event</option>
+          <option>Mock trial partnership</option>
+          <option>Suggesting a case or topic</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell us a bit about yourself or your question…"></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit()">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Law & Society Club · Chapel Hill High School · lawandsociety.chccs@gmail.com</p>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#events">Events</a>
+    <a href="#resources">Resources</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 80) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+
+  // Form submit handler
+  function handleSubmit() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!name || !email) {
+      alert('Please enter your name and email.');
+      return;
+    }
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#d4edda';
+    btn.style.color = '#155724';
+    btn.disabled = true;
+  }
+</script>
+
+</body>
+</html>
